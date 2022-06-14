@@ -1,0 +1,2 @@
+# credcollect
+Automatic credential collection
