@@ -12,14 +12,15 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-func DockerHub() (ret []common.DockerHubPassWord) {
+func DockerHub() []common.DockerHubPassWord {
+	ret := []common.DockerHubPassWord{}
 	filename, err := utils.GetItemPath(filepath.Join(os.Getenv("HOME"), "/.docker/"), "config.json")
 	if err != nil {
-		return
+		return ret
 	}
 	content, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return
+		return ret
 	}
 	h := gjson.GetBytes(content, "auths")
 	if h.Exists() {
@@ -28,7 +29,7 @@ func DockerHub() (ret []common.DockerHubPassWord) {
 			if a.Exists() {
 				u, err := base64.StdEncoding.DecodeString(a.String())
 				if err != nil {
-					return
+					return ret
 				}
 				account := strings.Split(string(u), ":")
 				if len(account) == 2 {
@@ -41,5 +42,5 @@ func DockerHub() (ret []common.DockerHubPassWord) {
 			}
 		}
 	}
-	return
+	return ret
 }

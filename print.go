@@ -16,6 +16,7 @@ func (opt *Options) PrintResult(res Output) {
 	content += check(len(res.SeeyonOA), "Seeyon", res.SeeyonOA)
 	content += check(len(res.DockerHub), "Docker Hub", res.DockerHub)
 	content += check(len(res.Tomcat), "Tomcat Manager", res.Tomcat)
+	content += check(len(res.ActiveMQ), "ActiveMQ WebConsole", res.ActiveMQ)
 	if !opt.Silent {
 		fmt.Printf(content)
 	}

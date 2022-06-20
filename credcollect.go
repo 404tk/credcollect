@@ -2,6 +2,7 @@ package credcollect
 
 import (
 	"github.com/404tk/credcollect/common"
+	"github.com/404tk/credcollect/pkg/activemq"
 	"github.com/404tk/credcollect/pkg/browser"
 	"github.com/404tk/credcollect/pkg/docker"
 	"github.com/404tk/credcollect/pkg/filezilla"
@@ -24,6 +25,7 @@ type Output struct {
 	SeeyonOA  []common.SeeyonPassWord
 	DockerHub []common.DockerHubPassWord
 	Tomcat    []common.TomcatPassWord
+	ActiveMQ  []common.ActiveMQPassWord
 }
 
 func (opt *Options) Enumerate() Output {
@@ -35,6 +37,7 @@ func (opt *Options) Enumerate() Output {
 	result.SeeyonOA = seeyon.SeeyonOA()
 	result.DockerHub = docker.DockerHub()
 	result.Tomcat = tomcat.TomcatManager()
+	result.ActiveMQ = activemq.ActiveMQConsole()
 	opt.PrintResult(result)
 	return result
 }

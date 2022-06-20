@@ -76,7 +76,8 @@ var (
 	}
 )
 
-func GetBrowserData() (res []common.BrowserPassword) {
+func GetBrowserData() []common.BrowserPassword {
+	res := []common.BrowserPassword{}
 	browsers := PickBrowser()
 
 	ret := make(map[string]map[string][]interface{})

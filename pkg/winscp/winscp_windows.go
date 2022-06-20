@@ -12,17 +12,18 @@ const (
 	PW_FLAG  = 0xFF
 )
 
-func WinScp() (ret []common.WinScpPassWord) {
+func WinScp() []common.WinScpPassWord {
+	ret := []common.WinScpPassWord{}
 	key, err := registry.OpenKey(registry.CURRENT_USER, "Software\\Martin Prikryl\\WinSCP 2\\Sessions", registry.ALL_ACCESS)
 	if err != nil {
 		//fmt.Println(err)
 		//fmt.Println("No servers is found.")
-		return
+		return ret
 	}
 	//key.Close()
 	kns, err := key.ReadSubKeyNames(0)
 	if err != nil {
-		return
+		return ret
 	}
 	for _, b := range kns {
 		key1, err := registry.OpenKey(key, b, registry.ALL_ACCESS)
@@ -50,7 +51,6 @@ func WinScp() (ret []common.WinScpPassWord) {
 
 	}
 	return ret
-
 }
 
 func decrypt(host, username, password string) string {

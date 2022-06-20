@@ -1,22 +1,17 @@
-package tomcat
+package activemq
 
 import (
 	"io/ioutil"
 	"os"
-	"path/filepath"
 	"regexp"
 
 	"github.com/404tk/credcollect/common"
 	"github.com/404tk/credcollect/common/utils"
 )
 
-func TomcatManager() []common.TomcatPassWord {
-	ret := []common.TomcatPassWord{}
-	path := os.Getenv("CATALINA_HOME")
-	if path == "" {
-		return ret
-	}
-	filename, err := utils.GetItemPath(filepath.Join(path, "/conf/"), "tomcat-users.xml")
+func ActiveMQConsole() []common.ActiveMQPassWord {
+	ret := []common.ActiveMQPassWord{}
+	filename, err := utils.GetItemPath("/*/*activemq/conf/", "jetty-realm.properties")
 	if err != nil {
 		return ret
 	}
@@ -35,10 +30,11 @@ func TomcatManager() []common.TomcatPassWord {
 	}
 	if len(ps) > 0 {
 		for _, m := range ps {
-			if len(m) == 2 {
-				ret = append(ret, common.TomcatPassWord{
+			if len(m) == 3 {
+				ret = append(ret, common.ActiveMQPassWord{
 					UserName: m["user"],
 					PassWord: m["pass"],
+					Role:     m["role"],
 				})
 			}
 		}
@@ -48,7 +44,7 @@ func TomcatManager() []common.TomcatPassWord {
 
 func getParams(content string) ([]map[string]string, error) {
 	res := []map[string]string{}
-	r, err := regexp.Compile(`<user username="(?P<user>\w+)" password="(?P<pass>[^<>]+?)"`)
+	r, err := regexp.Compile(`(?P<user>\w+):\s?(?P<pass>[\w]+?),\s?(?P<role>\w{3,8})`)
 	if err != nil {
 		return res, err
 	}

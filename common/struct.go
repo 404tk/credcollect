@@ -49,3 +49,9 @@ type TomcatPassWord struct {
 	UserName string `table:"UserName"`
 	PassWord string `table:"Password"`
 }
+
+type ActiveMQPassWord struct {
+	UserName string `table:"UserName"`
+	PassWord string `table:"Password"`
+	Role     string `table:"Role"`
+}

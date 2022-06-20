@@ -10,21 +10,25 @@ import (
 	"github.com/404tk/credcollect/common/utils"
 )
 
-func SeeyonOA() (ret []common.SeeyonPassWord) {
+func SeeyonOA() []common.SeeyonPassWord {
+	ret := []common.SeeyonPassWord{}
 	p, err := utils.GetItemPath("/*/Seeyon/*/base/conf/", "datasourceCtp.properties")
 	if err != nil {
-		return
+		return ret
 	}
 	file, err := os.Open(p)
 	if err != nil {
-		return
+		return ret
 	}
 	defer file.Close()
 	data, err := ioutil.ReadAll(file)
 	if err != nil {
-		return
+		return ret
 	}
 	ps, err := getParams(string(data))
+	if err != nil {
+		return ret
+	}
 	if len(ps) == 5 {
 		ret = append(ret, common.SeeyonPassWord{
 			DbType:   ps["dbtype"],
@@ -34,7 +38,7 @@ func SeeyonOA() (ret []common.SeeyonPassWord) {
 			Pwd:      dbPwdDecode(ps["pwd"]),
 		})
 	}
-	return
+	return ret
 }
 
 func getParams(content string) (map[string]string, error) {

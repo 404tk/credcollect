@@ -11,29 +11,30 @@ import (
 	"github.com/404tk/credcollect/common/utils"
 )
 
-func FileZilla() (ret []common.FileZillaPassWord) {
+func FileZilla() []common.FileZillaPassWord {
+	ret := []common.FileZillaPassWord{}
 	// https://stackoverflow.com/questions/10137154/recovering-saved-password-in-filezilla
 	filename, err := utils.GetItemPath(filepath.Join(os.Getenv("HOME"), "/.config/filezilla/"), "recentservers.xml")
 	if err != nil {
 		filename, err = utils.GetItemPath(filepath.Join(os.Getenv("HOME"), "/.filezilla/"), "recentservers.xml")
 		if err != nil {
-			return
+			return ret
 		}
 	}
 	file, err := os.Open(filename)
 	if err != nil {
-		return
+		return ret
 	}
 	defer file.Close()
 	data, err := ioutil.ReadAll(file)
 	if err != nil {
-		return
+		return ret
 	}
 
 	v := FileZillaXML{}
 	err = xml.Unmarshal(data, &v)
 	if err != nil {
-		return
+		return ret
 	}
 
 	for _, s := range v.RecentServers.Server {
@@ -53,5 +54,5 @@ func FileZilla() (ret []common.FileZillaPassWord) {
 			}
 		}
 	}
-	return
+	return ret
 }
