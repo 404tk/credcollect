@@ -40,7 +40,7 @@ builds:
       - -buildmode
       - exe
     ldflags:
-      - -s -w -H=windowsgui -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser
     hooks:
        post: upx --best -f -q "{{ .Path }}"
 
@@ -50,6 +50,8 @@ archives:
     format: binary
     files:
       - none*
+checksum:
+  name_template: 'checksums.txt'
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:

@@ -1,4 +1,4 @@
-package runner
+package credcollect
 
 import (
 	"fmt"
@@ -15,6 +15,7 @@ func (opt *Options) PrintResult(res Output) {
 	content += check(len(res.WinScp), "WinScp", res.WinScp)
 	content += check(len(res.SeeyonOA), "Seeyon", res.SeeyonOA)
 	content += check(len(res.DockerHub), "Docker Hub", res.DockerHub)
+	content += check(len(res.Tomcat), "Tomcat Manager", res.Tomcat)
 	if !opt.Silent {
 		fmt.Printf(content)
 	}

@@ -3,11 +3,11 @@ package main
 import (
 	"flag"
 
-	"github.com/404tk/credcollect/runner"
+	"github.com/404tk/credcollect"
 )
 
-func parseOptions() *runner.Options {
-	options := &runner.Options{}
+func parseOptions() *credcollect.Options {
+	options := &credcollect.Options{}
 	flag.BoolVar(&options.Silent, "silent", false, "silent scan")
 	flag.StringVar(&options.Output, "o", "", "output file, -o result.txt")
 	flag.Parse()

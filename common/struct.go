@@ -44,3 +44,8 @@ type DockerHubPassWord struct {
 	UserName string `table:"UserName"`
 	PassWord string `table:"Password"`
 }
+
+type TomcatPassWord struct {
+	UserName string `table:"UserName"`
+	PassWord string `table:"Password"`
+}
