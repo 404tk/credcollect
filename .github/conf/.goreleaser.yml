@@ -2,45 +2,36 @@ before:
   hooks:
     - go mod tidy
 builds:
-  - id: "linux-with-upx"
+  - id: "with-upx"
     main: ./cmd/main.go
     binary: credcollect
     env:
       - CGO_ENABLED=0
     goos:
       - linux
+      - windows
+      - darwin
     goarch:
       - amd64
       - arm64
       - arm
-      - "386"
+      - 386
     goarm:
-      - "6"
-      - "7"
-    flags:
-      - -trimpath
-    ldflags:
-      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser
-    hooks:
-       post: upx --best -f -q "{{ .Path }}"
-
-  - id: "windows-with-upx"
-    main: ./cmd/main.go
-    binary: credcollect
-    env:
-      - CGO_ENABLED=1
-      - CC=x86_64-w64-mingw32-gcc
-      - CXX=x86_64-w64-mingw32-g++
-    goos:
-      - windows
-    goarch:
-      - amd64
+      - 6
+      - 7
     flags:
       - -trimpath
       - -buildmode
       - exe
     ldflags:
       - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser
+    ignore:
+      - goos: windows
+        goarch: arm64
+      - goos: windows
+        goarch: arm
+      - goos: darwin
+        goarch: 386
     hooks:
        post: upx --best -f -q "{{ .Path }}"
 
@@ -50,6 +41,9 @@ archives:
     format: binary
     files:
       - none*
+  - replacements:
+      386: i386
+      amd64: x86_64
 checksum:
   name_template: 'checksums.txt'
 snapshot:

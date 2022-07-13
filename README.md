@@ -6,16 +6,16 @@ Only plaintext passwords (excluding cookies and tokens) are extracted.
 
 **Supported Module**
 
-|		OS Type		| Linux |Windows| MacOS	|
-| :---------------: | :--:	| :--:	| :--:	|
-|	Browser			|	√ 	|	√	|	√	|
-|	FileZilla		|	√	|	√	|	√	|
-|	Tomcat			|	√   |	√	|	√	|
-|	Navicat			|	    |	√	|		|
-|	WinScp			|		|	√	|		|
-|	Seeyon OA		|	√	|		|		|
-|	Docker Hub		|	√	|		|		|
-|	ActiveMQ		|	√	|		|		|
+|				| Linux |Windows| MacOS	|
+| :-----------: | :--:	| :--:	| :--:	|
+|	Browser		|	√ 	|	√	|	√	|
+|	FileZilla	|	√	|	√	|	√	|
+|	Tomcat		|	√   |	√	|	√	|
+|	Navicat		|	    |	√	|		|
+|	WinScp		|		|	√	|		|
+|	Seeyon OA	|	√	|		|		|
+|	Docker Hub	|	√	|		|		|
+|	ActiveMQ	|	√	|		|		|
 
 Usage
 -----

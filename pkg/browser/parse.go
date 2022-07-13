@@ -15,8 +15,8 @@ import (
 
 	"github.com/404tk/credcollect/common/utils"
 	"github.com/404tk/credcollect/pkg/browser/decrypt"
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/tidwall/gjson"
+	_ "modernc.org/sqlite"
 )
 
 type Item interface {
@@ -63,7 +63,7 @@ func NewCPasswords(main, sub string) Item {
 }
 
 func (p *passwords) ChromeParse(key []byte) error {
-	loginDB, err := sql.Open("sqlite3", ChromePasswordFile)
+	loginDB, err := sql.Open("sqlite", ChromePasswordFile)
 	if err != nil {
 		return err
 	}
@@ -216,7 +216,7 @@ func getFirefoxDecryptKey() (item1, item2, a11, a102 []byte, err error) {
 		pwdRows *sql.Rows
 		nssRows *sql.Rows
 	)
-	keyDB, err = sql.Open("sqlite3", FirefoxKey4File)
+	keyDB, err = sql.Open("sqlite", FirefoxKey4File)
 	if err != nil {
 		log.Println(err)
 		return nil, nil, nil, nil, err
