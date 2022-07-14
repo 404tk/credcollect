@@ -43,7 +43,7 @@ func SeeyonOA() []common.SeeyonPassWord {
 
 func getParams(content string) (map[string]string, error) {
 	paramsMap := make(map[string]string)
-	r, err := regexp.Compile(`ctpDataSource.username=(?P<user>[\w]+)[\s\S]+password=/[\d.]+/(?P<pwd>[\w=]+)\s+ctpDataSource.url=jdbc:(?P<dbtype>[\w]+)://(?P<host>[\w.:]+);DatabaseName=(?P<dbname>[\w]+)`)
+	r, err := regexp.Compile(`ctpDataSource\.username=(?P<user>[\w]+)[\s\S]+password=/[\d\.]+/(?P<pwd>[\w\/=]+)\s+ctpDataSource\.url=jdbc:(?P<dbtype>[\w]+)://(?P<host>[\w\.:-]+);DatabaseName=(?P<dbname>[\w]+)`)
 	if err != nil {
 		return paramsMap, err
 	}

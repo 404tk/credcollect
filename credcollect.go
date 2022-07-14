@@ -10,6 +10,7 @@ import (
 	"github.com/404tk/credcollect/pkg/seeyon"
 	"github.com/404tk/credcollect/pkg/tomcat"
 	"github.com/404tk/credcollect/pkg/winscp"
+	"github.com/404tk/credcollect/pkg/xshell"
 )
 
 type Options struct {
@@ -20,6 +21,7 @@ type Options struct {
 type Output struct {
 	Browser   []common.BrowserPassword
 	Navicat   []common.NavicatPassWord
+	XShell    []common.XShellPassWord
 	FileZilla []common.FileZillaPassWord
 	WinScp    []common.WinScpPassWord
 	SeeyonOA  []common.SeeyonPassWord
@@ -32,6 +34,7 @@ func (opt *Options) Enumerate() Output {
 	var result Output
 	result.Browser = browser.GetBrowserData()
 	result.Navicat = navicat.Navicat()
+	result.XShell = xshell.XShell()
 	result.FileZilla = filezilla.FileZilla()
 	result.WinScp = winscp.WinScp()
 	result.SeeyonOA = seeyon.SeeyonOA()

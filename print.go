@@ -11,6 +11,7 @@ func (opt *Options) PrintResult(res Output) {
 	var content string
 	content += check(len(res.Browser), "Browser", res.Browser)
 	content += check(len(res.Navicat), "Navicat", res.Navicat)
+	content += check(len(res.XShell), "XShell", res.XShell)
 	content += check(len(res.FileZilla), "FileZilla", res.FileZilla)
 	content += check(len(res.WinScp), "WinScp", res.WinScp)
 	content += check(len(res.SeeyonOA), "Seeyon", res.SeeyonOA)

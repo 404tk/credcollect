@@ -12,6 +12,7 @@ Only plaintext passwords (excluding cookies and tokens) are extracted.
 |	FileZilla	|	√	|	√	|	√	|
 |	Tomcat		|	√   |	√	|	√	|
 |	Navicat		|	    |	√	|		|
+|	XShell		|	    |	√	|		|
 |	WinScp		|		|	√	|		|
 |	Seeyon OA	|	√	|		|		|
 |	Docker Hub	|	√	|		|		|

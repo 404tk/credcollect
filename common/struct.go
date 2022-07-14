@@ -55,3 +55,10 @@ type ActiveMQPassWord struct {
 	PassWord string `table:"Password"`
 	Role     string `table:"Role"`
 }
+
+type XShellPassWord struct {
+	HostName   string `table:"Host"`
+	PortNumber string `table:"Port"`
+	UserName   string `table:"UserName"`
+	PassWord   string `table:"Password"`
+}
