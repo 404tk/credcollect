@@ -24,9 +24,11 @@ var (
 	utf32leBom = []byte{0xFF, 0xFE, 0x00, 0x00}
 	paths      = []string{
 		os.Getenv("USERPROFILE") + "/Documents/NetSarang/Xshell/Sessions/",
+		os.Getenv("USERPROFILE") + "/Documents/NetSarang/Xftp/Sessions/",
 		os.Getenv("USERPROFILE") + "/Documents/NetSarang Computer/7/Xshell/Sessions/",
 		os.Getenv("USERPROFILE") + "/Documents/NetSarang Computer/6/Xshell/Sessions/",
-		os.Getenv("USERPROFILE") + "/Documents/NetSarang Computer/5/Xshell/Sessions/",
+		os.Getenv("USERPROFILE") + "/Documents/NetSarang Computer/7/Xftp/Sessions/",
+		os.Getenv("USERPROFILE") + "/Documents/NetSarang Computer/6/Xftp/Sessions/",
 	}
 )
 
@@ -77,7 +79,7 @@ func getFiles(paths []string) []string {
 		}
 		filepath.Walk(p,
 			func(path string, info os.FileInfo, err error) error {
-				if strings.HasSuffix(path, ".xsh") {
+				if strings.HasSuffix(path, ".xsh") || strings.HasSuffix(path, ".xfp") {
 					files = append(files, path)
 				}
 				return nil
@@ -181,6 +183,14 @@ func getParams(content string) (map[string]string, error) {
 	ps2 := regexpMatch(r2, content)
 	for k, v := range ps2 {
 		paramsMap[k] = v
+	}
+
+	if paramsMap["user"] == "" {
+		r3 := regexp.MustCompile(`\nUserName=(?P<user>\w+)`)
+		ps3 := regexpMatch(r3, content)
+		for k, v := range ps3 {
+			paramsMap[k] = v
+		}
 	}
 
 	return paramsMap, nil
