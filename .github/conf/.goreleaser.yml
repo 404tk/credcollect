@@ -15,10 +15,10 @@ builds:
       - amd64
       - arm64
       - arm
-      - "386"
+      - 386
     goarm:
-      - "6"
-      - "7"
+      - 6
+      - 7
     flags:
       - -trimpath
       - -buildmode
@@ -31,7 +31,7 @@ builds:
       - goos: windows
         goarch: arm
       - goos: darwin
-        goarch: "386"
+        goarch: 386
     hooks:
        post: upx --best -f -q "{{ .Path }}"
 
@@ -41,7 +41,7 @@ archives:
     format: binary
     files:
       - none*
-  - replacements:
+    replacements:
       386: i386
       amd64: x86_64
 checksum:
