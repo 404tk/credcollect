@@ -14,7 +14,7 @@ import (
 
 // CredentialPersistence describes one of three persistence modes of a credential.
 // A detailed description of the available modes can be found on
-// Docs: https://docs.microsoft.com/en-us/windows/desktop/api/wincred/ns-wincred-_credentialw
+// Docs: https://docs.microsoft.com/en-us/windows/desktop/api/wincred/ns-wincred-credentialw
 type CredentialPersistence uint32
 
 // CredentialAttribute represents an application-specific attribute of a credential.
@@ -44,11 +44,13 @@ func WinCred() []common.WinCred {
 		return ret
 	}
 	for i := range creds {
-		ret = append(ret, common.WinCred{
-			TargetName: creds[i].TargetName,
-			UserName:   creds[i].UserName,
-			PassWord:   string(bytes.Replace(creds[i].CredentialBlob, []byte{0}, []byte{}, -1)),
-		})
+		if len(creds[i].CredentialBlob) < 100 {
+			ret = append(ret, common.WinCred{
+				TargetName: creds[i].TargetName,
+				UserName:   creds[i].UserName,
+				PassWord:   string(bytes.Replace(creds[i].CredentialBlob, []byte{0}, []byte{}, -1)),
+			})
+		}
 	}
 	return ret
 }
@@ -75,7 +77,7 @@ type proc interface {
 	Call(a ...uintptr) (r1, r2 uintptr, lastErr error)
 }
 
-// https://docs.microsoft.com/en-us/windows/desktop/api/wincred/ns-wincred-_credentialw
+// https://docs.microsoft.com/en-us/windows/desktop/api/wincred/ns-wincred-credentialw
 type sysCREDENTIAL struct {
 	Flags              uint32
 	Type               uint32
@@ -91,7 +93,7 @@ type sysCREDENTIAL struct {
 	UserName           *uint16
 }
 
-// https://docs.microsoft.com/en-us/windows/desktop/api/wincred/ns-wincred-_credential_attributew
+// https://docs.microsoft.com/en-us/windows/desktop/api/wincred/ns-wincred-credential_attributew
 type sysCREDENTIAL_ATTRIBUTE struct {
 	Keyword   *uint16
 	Flags     uint32
