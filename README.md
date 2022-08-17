@@ -17,6 +17,7 @@ Only plaintext passwords (excluding cookies and tokens) are extracted.
 |	Seeyon OA	|	√	|		|		|
 |	Docker Hub	|	√	|		|		|
 |	ActiveMQ	|	√	|		|		|
+|	CredManager	|		|	√	|		|	
 
 Usage
 -----

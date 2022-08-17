@@ -18,6 +18,7 @@ func (opt *Options) PrintResult(res Output) {
 	content += check(len(res.DockerHub), "Docker Hub", res.DockerHub)
 	content += check(len(res.Tomcat), "Tomcat Manager", res.Tomcat)
 	content += check(len(res.ActiveMQ), "ActiveMQ WebConsole", res.ActiveMQ)
+	content += check(len(res.WinCred), "Windows Credential Manager", res.WinCred)
 	if !opt.Silent {
 		fmt.Printf(content)
 	}
@@ -28,7 +29,7 @@ func (opt *Options) PrintResult(res Output) {
 
 func check(len int, name string, data interface{}) (c string) {
 	if len > 0 {
-		c = fmt.Sprintf("%s credentials:\n%s\n", name, table.Table(data))
+		c = fmt.Sprintf("Credentials from %s:\n%s\n", name, table.Table(data))
 	}
 	return
 }

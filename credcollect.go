@@ -9,6 +9,7 @@ import (
 	"github.com/404tk/credcollect/pkg/navicat"
 	"github.com/404tk/credcollect/pkg/seeyon"
 	"github.com/404tk/credcollect/pkg/tomcat"
+	"github.com/404tk/credcollect/pkg/wincred"
 	"github.com/404tk/credcollect/pkg/winscp"
 	"github.com/404tk/credcollect/pkg/xshell"
 )
@@ -28,6 +29,7 @@ type Output struct {
 	DockerHub []common.DockerHubPassWord
 	Tomcat    []common.TomcatPassWord
 	ActiveMQ  []common.ActiveMQPassWord
+	WinCred   []common.WinCred
 }
 
 func (opt *Options) Enumerate() Output {
@@ -41,6 +43,7 @@ func (opt *Options) Enumerate() Output {
 	result.DockerHub = docker.DockerHub()
 	result.Tomcat = tomcat.TomcatManager()
 	result.ActiveMQ = activemq.ActiveMQConsole()
+	result.WinCred = wincred.WinCred()
 	opt.PrintResult(result)
 	return result
 }

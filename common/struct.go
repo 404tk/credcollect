@@ -62,3 +62,9 @@ type XShellPassWord struct {
 	UserName   string `table:"UserName"`
 	PassWord   string `table:"Password"`
 }
+
+type WinCred struct {
+	TargetName string `table:"Target"`
+	UserName   string `table:"UserName"`
+	PassWord   string `table:"Password"`
+}
